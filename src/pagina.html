@@ -32,68 +32,185 @@
     }
 
     .membrana-bicamada {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    margin: 2rem 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin: 2rem 0;
+      position: relative; /* cria contexto de z-index */
+      z-index: 0;
     }
 
     /* Camadas de fosfolipídios */
     .camada-top, .camada-bottom {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    align-items: flex-end;
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      align-items: flex-end;
     }
 
     .fosfolipidio {
-    width: 15px;
-    height: 50px;
-    background: #0d6efd;
-    border-radius: 5px;
-    position: relative;
-    animation: flutuar 3s infinite ease-in-out;
+      width: 15px;
+      height: 50px;
+      background: #0d6efd;
+      border-radius: 5px;
+      position: relative;
+      animation: flutuar 3s infinite ease-in-out;
+      cursor: pointer;
+      z-index: 1;
     }
 
+    /* Cabeça polar */
     .fosfolipidio::after {
-    content: "";
-    width: 20px;
-    height: 20px;
-    background: #ffb703;
-    border-radius: 50%;
-    position: absolute;
-    top: -25px; /* cabeça para cima */
-    left: -2px;
+      content: "";
+      width: 20px;
+      height: 20px;
+      background: #ffb703;
+      border-radius: 50%;
+      position: absolute;
+      top: -25px; /* cabeça para cima */
+      left: -2px;
+      z-index: 1;
     }
 
-    /* Camada inferior invertida visualmente */
+    /* Camada inferior invertida */
     .camada-bottom .fosfolipidio::after {
-    top: auto;
-    bottom: -25px; /* cabeça para baixo */
+      top: auto;
+      bottom: -25px; /* cabeça para baixo */
     }
 
-    .proteina1 {
-    width: 12px;
-    height: 50px;
-    background: rgb(190, 0, 0);
-    border-radius: 6px;
-    animation: flutuar 3s infinite ease-in-out;
-    align-self: center;
+    /* Tooltip no fosfolipídio */
+    .fosfolipidio:hover::before {
+      content: "Fosfolipídio: cabeça polar (hidrofílica) e cauda apolar (hidrofóbica).";
+      position: absolute;
+      top: -55px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.85);
+      color: #fff;
+      padding: 6px 8px;
+      border-radius: 6px;
+      max-width: 160px;
+      white-space: normal;
+      word-wrap: break-word;
+      text-align: center;
+      font-size: 0.75rem;
+      line-height: 1.2rem;
+      z-index: 9999; /* garante acima de tudo */
     }
-    .proteina2 {
-    width: 12px;
-    height: 50px;
-    background: rgb(2, 170, 2);
-    border-radius: 6px;
-    animation: flutuar 3s infinite ease-in-out;
-    align-self: center;
+
+    /* Proteínas */
+    .proteina {
+      width: 12px;
+      height: 50px;
+      background: #28a745;
+      border-radius: 6px;
+      position: relative;
+      animation: flutuar 3s infinite ease-in-out;
+      cursor: pointer;
+      z-index: 1;
+    }
+
+    /* Tooltip da proteína */
+    .proteina:hover::before {
+      content: "Proteína de membrana: transporta substâncias e atua na comunicação celular.";
+      position: absolute;
+      top: -55px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.9);
+      color: #fff;
+      padding: 6px 8px;
+      border-radius: 6px;
+      max-width: 160px;
+      white-space: normal;
+      word-wrap: break-word;
+      text-align: center;
+      font-size: 0.75rem;
+      line-height: 1.2rem;
+      z-index: 9999;
     }
 
     @keyframes flutuar {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-5px); }
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
     }
+
+    /* Quiz - botões e alternativas */
+.quiz-option {
+  cursor: pointer;
+  transition: 0.3s;
+  text-align: center;
+  width: 100%;
+}
+
+/* Respostas corretas/incorretas */
+.quiz-option.correct,
+.list-group-item.correct {
+  background-color: #198754 !important; /* verde */
+  color: #fff !important;
+  border-color: #198754 !important;
+}
+
+.quiz-option.incorrect,
+.list-group-item.wrong {
+  background-color: #dc3545 !important; /* vermelho */
+  color: #fff !important;
+  border-color: #dc3545 !important;
+}
+
+/* Caixa de explicação */
+.explanation {
+  display: none;
+  margin: 0.5rem auto 0 auto;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  background: #f1f1f1;
+  max-width: 400px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.explanation.show {
+  display: block;
+}
+
+/* Lista de opções centralizada */
+#quizCarousel .list-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem; /* espaçamento entre botões */
+  padding: 0;
+  margin: 0 auto;
+  max-width: 400px; /* limita a largura */
+}
+
+/* Controles do carrossel nas laterais */
+#quizCarousel .carousel-control-prev,
+#quizCarousel .carousel-control-next {
+  width: 40px;
+  height: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 51, 102, 0.7);
+  border-radius: 50%;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+#quizCarousel .carousel-control-prev:hover,
+#quizCarousel .carousel-control-next:hover {
+  background-color: rgba(0, 51, 102, 0.9);
+}
+
+#quizCarousel .carousel-control-prev-icon,
+#quizCarousel .carousel-control-next-icon {
+  filter: invert(1); /* seta branca */
+}
 
 
   </style>
@@ -141,7 +258,7 @@
             <div class="fosfolipidio"></div>
             <div class="fosfolipidio"></div>
             <div class="fosfolipidio"></div>
-            <div class="proteina1"></div>
+            <div class="proteina" style="background: rgb(2, 170, 2);"></div>
             <div class="fosfolipidio"></div>
             <div class="fosfolipidio"></div>
             <div class="fosfolipidio"></div>
@@ -150,7 +267,7 @@
           <!-- Camada inferior invertida -->
           <div class="camada-bottom">
             <div class="fosfolipidio invertido"></div>
-            <div class="proteina2"></div>
+            <div class="proteina" style="background: rgb(190, 0, 0);"></div>
             <div class="fosfolipidio invertido"></div>
             <div class="fosfolipidio invertido"></div>
             <div class="fosfolipidio invertido"></div>
@@ -169,7 +286,8 @@
           Presente em plantas, fungos e bactérias, a parede celular fornece <strong>sustentação e proteção</strong>. 
           Ela é rígida e composta principalmente por 
           <span class="tooltip-custom" data-bs-toggle="tooltip" title="Polissacarídeo estrutural encontrado em plantas">celulose</span> (em vegetais), 
-          <em>quitina</em> (em fungos) ou <em>peptidoglicano</em> (em bactérias).
+          <span class="tooltip-custom" data-bs-toggle="tooltip" title="polissacarídio estrutural integrante do exosqueleto dos artrópodes e da parede celular dos fungos">quitina</span> (em fungos) ou 
+          <span class="tooltip-custom" data-bs-toggle="tooltip" title="polímero formado por açúcares e aminoácidos que compõe a parede celular bacteriana, conferindo forma e resistência mecânica à célula">peptidoglicano</span> (em bactérias).
         </p>
       </div>
     </div>
@@ -201,30 +319,100 @@
       </div>
     </div>
 
-    <!-- Quiz -->
-    <div class="card shadow-sm mb-4">
-      <div class="card-body">
-        <h2 class="h4 text-warning">Quiz rápido</h2>
-        <p><strong>Pergunta:</strong> Todas as células possuem parede celular?</p>
-        <button class="btn btn-outline-primary" onclick="alert('Não! Apenas plantas, fungos e bactérias possuem. As células animais têm apenas a membrana plasmática.')">
-          Ver resposta
-        </button>
+  <!-- Quiz carrossel -->
+<div class="card shadow-sm mb-4">
+  <div class="card-body">
+    <h2 class="h4 text-warning">Quiz interativo</h2>
+
+    <div id="quizCarousel" class="carousel slide" data-bs-interval="false">
+      <div class="carousel-inner">
+
+        <!-- Pergunta 1 -->
+        <div class="carousel-item active">
+          <h5>Todas as células possuem parede celular?</h5>
+          <div class="list-group">
+            <button class="list-group-item list-group-item-action quiz-option" data-correct="false" data-explain="Não! As células animais não possuem parede celular, apenas membrana plasmática.">Sim</button>
+            <button class="list-group-item list-group-item-action quiz-option" data-correct="true" data-explain="Correto! Apenas plantas, fungos e bactérias possuem parede celular.">Não</button>
+          </div>
+          <div class="explanation mt-2"></div>
+        </div>
+
+        <!-- Pergunta 2 -->
+        <div class="carousel-item">
+          <h5>Qual a principal função da membrana plasmática?</h5>
+          <div class="list-group">
+            <button class="list-group-item list-group-item-action quiz-option" data-correct="false" data-explain="Errado. Sustentação e rigidez são funções da parede celular.">Fornecer rigidez</button>
+            <button class="list-group-item list-group-item-action quiz-option" data-correct="true" data-explain="Correto! A membrana controla a entrada e saída de substâncias (permeabilidade seletiva).">Controlar a entrada e saída de substâncias</button>
+            <button class="list-group-item list-group-item-action quiz-option" data-correct="false" data-explain="Não. A fotossíntese é realizada nos cloroplastos das células vegetais.">Realizar fotossíntese</button>
+          </div>
+          <div class="explanation mt-2"></div>
+        </div>
+
+        <!-- Pergunta 3 -->
+        <div class="carousel-item">
+          <h5>Qual composto forma a parede celular das plantas?</h5>
+          <div class="list-group">
+            <button class="list-group-item list-group-item-action quiz-option" data-correct="true" data-explain="Correto! A celulose é o principal componente da parede celular vegetal.">Celulose</button>
+            <button class="list-group-item list-group-item-action quiz-option" data-correct="false" data-explain="Errado. A quitina é encontrada em fungos e artrópodes.">Quitina</button>
+            <button class="list-group-item list-group-item-action quiz-option" data-correct="false" data-explain="Não. O peptidoglicano compõe a parede das bactérias.">Peptidoglicano</button>
+          </div>
+          <div class="explanation mt-2"></div>
+        </div>
+
       </div>
+
+      <!-- Controles -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#quizCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#quizCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </button>
     </div>
+  </div>
+</div>
 
   </main>
 
   <!-- Rodapé -->
   <footer class="text-center py-3 bg-primary text-white">
-    <p class="mb-0">Projeto Info+Bio | Desenvolvido para fins educativos</p>
+    <p class="mb-0">Projeto Integrador + BioMaket | Desenvolvido para fins educativos</p>
   </footer>
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    // Ativa tooltips
-    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-    const tooltipList = [...tooltipTriggerList].map(el => new bootstrap.Tooltip(el))
-  </script>
+  // Ativa tooltips do Bootstrap
+  const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+  [...tooltipTriggerList].map(el => new bootstrap.Tooltip(el));
+
+  // Quiz interativo
+  document.querySelectorAll(".quiz-option").forEach(btn => {
+    btn.addEventListener("click", function() {
+      const parent = btn.closest(".carousel-item");
+      const explanationBox = parent.querySelector(".explanation");
+
+      // Desativa todos os botões da pergunta
+      parent.querySelectorAll(".quiz-option").forEach(opt => {
+        opt.disabled = true;
+
+        // Remove classes anteriores
+        opt.classList.remove("correct", "wrong");
+      });
+
+      // Aplica cor correta ou incorreta
+      if (btn.dataset.correct === "true") {
+        btn.classList.add("correct");
+      } else {
+        btn.classList.add("wrong");
+      }
+
+      // Mostra explicação
+      explanationBox.textContent = btn.dataset.explain;
+      explanationBox.classList.add("show");
+    });
+  });
+</script>
+
 </body>
 </html>
