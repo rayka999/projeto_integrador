@@ -41,7 +41,6 @@
       <div class="card-body">
         <h2 class="h4 text-primary">Membrana Plasmática</h2>
 
-        <!-- Conceito -->
         <h5 class="text-primary">Conceito</h5>
         <p>
           A <span class="tooltip-custom" data-bs-toggle="tooltip" title="Camada fina e flexível que envolve todas as células">membrana plasmática</span> 
@@ -112,6 +111,75 @@
               <div class="cauda" data-bs-toggle="tooltip" title="Cauda apolar (hidrofóbica)"></div>
             </div>
           </div>
+
+          <p class="text-center text-muted mt-2"><em>Representação mosaico fluido</em></p>
+          <div class="membrana" id="membrana"></div>
+
+          <script>
+          const membrana = document.getElementById("membrana");
+          const width = membrana.clientWidth;
+          const height = membrana.clientHeight;
+          const pecaSize = 25;
+          const cols = Math.floor(width/pecaSize);
+          const rows = Math.floor(height/pecaSize);
+
+          const molecules = [];
+
+          // Criar grid inicial
+          for(let i=0;i<cols;i++){
+            for(let j=0;j<rows;j++){
+              const div = document.createElement('div');
+              div.className = Math.random()<0.85?'peca lipid':'peca protein';
+              div.x = i*pecaSize;
+              div.y = j*pecaSize;
+              div.vx = (Math.random()-0.5)*0.2;
+              div.vy = (Math.random()-0.5)*0.2;
+              div.style.left = div.x+'px';
+              div.style.top = div.y+'px';
+              molecules.push(div);
+              membrana.appendChild(div);
+            }
+          }
+
+          // Função de animação contínua com colisões
+          function animate(){
+            for(let i=0;i<molecules.length;i++){
+              const m = molecules[i];
+              m.x += m.vx;
+              m.y += m.vy;
+
+              // Rebote nas bordas da membrana
+              if(m.x<0){m.x=0; m.vx*=-1;}
+              if(m.x>width-pecaSize){m.x=width-pecaSize; m.vx*=-1;}
+              if(m.y<0){m.y=0; m.vy*=-1;}
+              if(m.y>height-pecaSize){m.y=height-pecaSize; m.vy*=-1;}
+
+              // Colisões suaves com outras moléculas
+              for(let j=i+1;j<molecules.length;j++){
+                const o = molecules[j];
+                const dx = o.x - m.x;
+                const dy = o.y - m.y;
+                const dist = Math.sqrt(dx*dx + dy*dy);
+                if(dist<pecaSize){
+                  const overlap = pecaSize - dist;
+                  const ox = (dx/dist)*overlap*0.5;
+                  const oy = (dy/dist)*overlap*0.5;
+                  m.x -= ox;
+                  m.y -= oy;
+                  o.x += ox;
+                  o.y += oy;
+                }
+              }
+
+              m.style.left = m.x+'px';
+              m.style.top = m.y+'px';
+            }
+
+            requestAnimationFrame(animate);
+          }
+
+          animate();
+          </script>
         </div>
 
         <!-- Estrutura e composição -->
