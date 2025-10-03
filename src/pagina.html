@@ -32,104 +32,64 @@
       font-weight: bold;
     }
 
+    /* Container da bicamada */
     .membrana-bicamada {
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 10px;
       margin: 2rem 0;
-      position: relative; /* cria contexto de z-index */
+      position: relative; 
       z-index: 0;
     }
 
-    /* Camadas de fosfolipídios */
+    /* Linhas da bicamada */
     .camada-top, .camada-bottom {
       display: flex;
       justify-content: center;
       gap: 8px;
-      align-items: flex-end;
+      align-items: center;
     }
 
+    /* Fosfolipídio como "container" */
     .fosfolipidio {
-      width: 15px;
-      height: 50px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      width: 20px;
+      cursor: pointer;
+      animation: flutuar 3s infinite ease-in-out;
+    }
+
+    /* Cauda apolar (hidrofóbica) */
+    .fosfolipidio .cauda {
+      width: 12px;
+      height: 40px;
       background: #0d6efd;
       border-radius: 5px;
-      position: relative;
-      animation: flutuar 3s infinite ease-in-out;
-      cursor: pointer;
-      z-index: 1;
     }
 
-    /* Cabeça polar */
-    .fosfolipidio::after {
-      content: "";
+    /* Cabeça polar (hidrofílica) */
+    .fosfolipidio .cabeca {
       width: 20px;
       height: 20px;
       background: #ffb703;
       border-radius: 50%;
-      position: absolute;
-      top: -25px; /* cabeça para cima */
-      left: -2px;
-      z-index: 1;
     }
 
-    /* Camada inferior invertida */
-    .camada-bottom .fosfolipidio::after {
-      top: auto;
-      bottom: -25px; /* cabeça para baixo */
-    }
-
-    /* Tooltip no fosfolipídio */
-    .fosfolipidio:hover::before {
-      content: "Fosfolipídio: cabeça polar (hidrofílica) e cauda apolar (hidrofóbica).";
-      position: absolute;
-      top: -55px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(0,0,0,0.85);
-      color: #fff;
-      padding: 6px 8px;
-      border-radius: 6px;
-      max-width: 160px;
-      white-space: normal;
-      word-wrap: break-word;
-      text-align: center;
-      font-size: 0.75rem;
-      line-height: 1.2rem;
-      z-index: 9999; /* garante acima de tudo */
+    /* Camada inferior: invertida */
+    .camada-bottom .fosfolipidio {
+      flex-direction: column-reverse;
     }
 
     /* Proteínas */
     .proteina {
-      width: 12px;
+      width: 14px;
       height: 50px;
-      background: #28a745;
       border-radius: 6px;
-      position: relative;
       animation: flutuar 3s infinite ease-in-out;
       cursor: pointer;
-      z-index: 1;
-    }
-
-    /* Tooltip da proteína */
-    .proteina:hover::before {
-      content: "Proteína de membrana: transporta substâncias e atua na comunicação celular.";
-      position: absolute;
-      top: -55px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(0,0,0,0.9);
-      color: #fff;
-      padding: 6px 8px;
-      border-radius: 6px;
-      max-width: 160px;
-      white-space: normal;
-      word-wrap: break-word;
-      text-align: center;
-      font-size: 0.75rem;
-      line-height: 1.2rem;
-      z-index: 9999;
     }
 
     @keyframes flutuar {
@@ -212,155 +172,155 @@
   }
 
   /* Cloroplastos */
-.chloroplast {
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  background-color: #27ae60;
-  border-radius: 50%;
-  z-index: 4;
-  cursor: pointer;
-  animation: moveSmall 6s infinite alternate;
-}
+    .chloroplast {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: #27ae60;
+      border-radius: 50%;
+      z-index: 4;
+      cursor: pointer;
+      animation: moveSmall 6s infinite alternate;
+    }
 
-/* Mitocôndrias */
-.mitochondria {
-  position: absolute;
-  width: 25px;
-  height: 15px;
-  background-color: #e67e22;
-  border-radius: 50% / 40%;
-  z-index: 4;
-  cursor: pointer;
-  animation: moveMedium 8s infinite alternate;
-}
+    /* Mitocôndrias */
+    .mitochondria {
+      position: absolute;
+      width: 25px;
+      height: 15px;
+      background-color: #e67e22;
+      border-radius: 50% / 40%;
+      z-index: 4;
+      cursor: pointer;
+      animation: moveMedium 8s infinite alternate;
+    }
 
-/* Vacúolo */
-.vacuole {
-  position: absolute;
-  width: 50px;
-  height: 80px;
-  background-color: #5dade2;
-  border-radius: 50%;
-  z-index: 6;
-  top: 60px;
-  left: 45px;
-  cursor: pointer;
-}
+    /* Vacúolo */
+    .vacuole {
+      position: absolute;
+      width: 50px;
+      height: 80px;
+      background-color: #5dade2;
+      border-radius: 50%;
+      z-index: 6;
+      top: 60px;
+      left: 45px;
+      cursor: pointer;
+    }
 
-/* Animações de organelas */
-@keyframes moveSmall {
-  0% { transform: translate(0,0);}
-  25% { transform: translate(8px,-5px);}
-  50% { transform: translate(-8px,6px);}
-  75% { transform: translate(5px,5px);}
-  100% { transform: translate(0,0);}
-}
+    /* Animações de organelas */
+    @keyframes moveSmall {
+      0% { transform: translate(0,0);}
+      25% { transform: translate(8px,-5px);}
+      50% { transform: translate(-8px,6px);}
+      75% { transform: translate(5px,5px);}
+      100% { transform: translate(0,0);}
+    }
 
-@keyframes moveMedium {
-  0% { transform: translate(0,0);}
-  25% { transform: translate(-10px,8px);}
-  50% { transform: translate(10px,-10px);}
-  75% { transform: translate(-5px,5px);}
-  100% { transform: translate(0,0);}
-}
+    @keyframes moveMedium {
+      0% { transform: translate(0,0);}
+      25% { transform: translate(-10px,8px);}
+      50% { transform: translate(10px,-10px);}
+      75% { transform: translate(-5px,5px);}
+      100% { transform: translate(0,0);}
+    }
 
-  /* ---------------- Animações ---------------- */
-  @keyframes membraneFloat {
-    0%,100% { transform: translateY(0); }
-    50% { transform: translateY(-5px); }
-  }
+      /* ---------------- Animações ---------------- */
+      @keyframes membraneFloat {
+        0%,100% { transform: translateY(0); }
+        50% { transform: translateY(-5px); }
+      }
 
-  @keyframes cytoplasmFloat {
-    0%,100% { transform: translate(0,0); }
-    25% { transform: translate(2px,-2px); }
-    50% { transform: translate(-2px,2px); }
-    75% { transform: translate(1px,1px); }
-  }
+      @keyframes cytoplasmFloat {
+        0%,100% { transform: translate(0,0); }
+        25% { transform: translate(2px,-2px); }
+        50% { transform: translate(-2px,2px); }
+        75% { transform: translate(1px,1px); }
+      }
 
-  @keyframes particleMove {
-    0% { transform: translate(0,0); }
-    25% { transform: translate(10px,-8px); }
-    50% { transform: translate(-10px,8px); }
-    75% { transform: translate(8px,-8px); }
-    100% { transform: translate(0,0); }
-  }
+      @keyframes particleMove {
+        0% { transform: translate(0,0); }
+        25% { transform: translate(10px,-8px); }
+        50% { transform: translate(-10px,8px); }
+        75% { transform: translate(8px,-8px); }
+        100% { transform: translate(0,0); }
+      }
 
-    /* Quiz - botões e alternativas */
-.quiz-option {
-  cursor: pointer;
-  transition: 0.3s;
-  text-align: center;
-  width: 100%;
-}
+        /* Quiz - botões e alternativas */
+    .quiz-option {
+      cursor: pointer;
+      transition: 0.3s;
+      text-align: center;
+      width: 100%;
+    }
 
-/* Respostas corretas/incorretas */
-.quiz-option.correct,
-.list-group-item.correct {
-  background-color: #198754 !important; /* verde */
-  color: #fff !important;
-  border-color: #198754 !important;
-}
+    /* Respostas corretas/incorretas */
+    .quiz-option.correct,
+    .list-group-item.correct {
+      background-color: #198754 !important; /* verde */
+      color: #fff !important;
+      border-color: #198754 !important;
+    }
 
-.quiz-option.incorrect,
-.list-group-item.wrong {
-  background-color: #dc3545 !important; /* vermelho */
-  color: #fff !important;
-  border-color: #dc3545 !important;
-}
+    .quiz-option.incorrect,
+    .list-group-item.wrong {
+      background-color: #dc3545 !important; /* vermelho */
+      color: #fff !important;
+      border-color: #dc3545 !important;
+    }
 
-/* Caixa de explicação */
-.explanation {
-  display: none;
-  margin: 0.5rem auto 0 auto;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  background: #f1f1f1;
-  max-width: 400px;
-  text-align: center;
-  font-size: 0.9rem;
-}
+    /* Caixa de explicação */
+    .explanation {
+      display: none;
+      margin: 0.5rem auto 0 auto;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      background: #f1f1f1;
+      max-width: 400px;
+      text-align: center;
+      font-size: 0.9rem;
+    }
 
-.explanation.show {
-  display: block;
-}
+    .explanation.show {
+      display: block;
+    }
 
-/* Lista de opções centralizada */
-#quizCarousel .list-group {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem; /* espaçamento entre botões */
-  padding: 0;
-  margin: 0 auto;
-  max-width: 400px; /* limita a largura */
-}
+    /* Lista de opções centralizada */
+    #quizCarousel .list-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem; /* espaçamento entre botões */
+      padding: 0;
+      margin: 0 auto;
+      max-width: 400px; /* limita a largura */
+    }
 
-/* Controles do carrossel nas laterais */
-#quizCarousel .carousel-control-prev,
-#quizCarousel .carousel-control-next {
-  width: 40px;
-  height: 40px;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: rgba(0, 51, 102, 0.7);
-  border-radius: 50%;
-  color: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 10;
-}
+    /* Controles do carrossel nas laterais */
+    #quizCarousel .carousel-control-prev,
+    #quizCarousel .carousel-control-next {
+      width: 40px;
+      height: 40px;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 51, 102, 0.7);
+      border-radius: 50%;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+    }
 
-#quizCarousel .carousel-control-prev:hover,
-#quizCarousel .carousel-control-next:hover {
-  background-color: rgba(0, 51, 102, 0.9);
-}
+    #quizCarousel .carousel-control-prev:hover,
+    #quizCarousel .carousel-control-next:hover {
+      background-color: rgba(0, 51, 102, 0.9);
+    }
 
-#quizCarousel .carousel-control-prev-icon,
-#quizCarousel .carousel-control-next-icon {
-  filter: invert(1); /* seta branca */
-}
+    #quizCarousel .carousel-control-prev-icon,
+    #quizCarousel .carousel-control-next-icon {
+      filter: invert(1); /* seta branca */
+    }
 
 
   </style>
@@ -410,24 +370,62 @@
         <div class="membrana-bicamada mb-3">
           <!-- Camada superior -->
           <div class="camada-top">
-            <div class="fosfolipidio"></div>
-            <div class="fosfolipidio"></div>
-            <div class="fosfolipidio"></div>
-            <div class="proteina" style="background: rgb(2, 170, 2);"></div>
-            <div class="fosfolipidio"></div>
-            <div class="fosfolipidio"></div>
-            <div class="fosfolipidio"></div>
+            <div class="fosfolipidio">
+              <div class="cabeca" data-bs-toggle="tooltip" title="Cabeça polar (hidrofílica)"></div>
+              <div class="cauda" data-bs-toggle="tooltip" title="Cauda apolar (hidrofóbica)"></div>
+            </div>
+            <div class="proteina" 
+                style="background: purple;" 
+                data-bs-toggle="tooltip" 
+                title="Proteína de membrana: transporta substâncias e atua na comunicação celular."></div>
+            <div class="fosfolipidio">
+              <div class="cabeca" data-bs-toggle="tooltip" title="Cabeça polar (hidrofílica)"></div>
+              <div class="cauda" data-bs-toggle="tooltip" title="Cauda apolar (hidrofóbica)"></div>
+            </div>
+            <div class="fosfolipidio">
+              <div class="cabeca" data-bs-toggle="tooltip" title="Cabeça polar (hidrofílica)"></div>
+              <div class="cauda" data-bs-toggle="tooltip" title="Cauda apolar (hidrofóbica)"></div>
+            </div>
+
+            <div class="proteina" 
+                style="background: rgb(2, 170, 2);" 
+                data-bs-toggle="tooltip" 
+                title="Proteína de membrana: transporta substâncias e atua na comunicação celular."></div>
+
+            <div class="fosfolipidio">
+              <div class="cabeca" data-bs-toggle="tooltip" title="Cabeça polar (hidrofílica)"></div>
+              <div class="cauda" data-bs-toggle="tooltip" title="Cauda apolar (hidrofóbica)"></div>
+            </div>
           </div>
 
-          <!-- Camada inferior invertida -->
+          <!-- Camada inferior -->
           <div class="camada-bottom">
-            <div class="fosfolipidio invertido"></div>
-            <div class="proteina" style="background: rgb(190, 0, 0);"></div>
-            <div class="fosfolipidio invertido"></div>
-            <div class="fosfolipidio invertido"></div>
-            <div class="fosfolipidio invertido"></div>
-            <div class="fosfolipidio invertido"></div>
-            <div class="fosfolipidio invertido"></div>
+            <div class="fosfolipidio">
+              <div class="cabeca" data-bs-toggle="tooltip" title="Cabeça polar (hidrofílica)"></div>
+              <div class="cauda" data-bs-toggle="tooltip" title="Cauda apolar (hidrofóbica)"></div>
+            </div>
+            <div class="fosfolipidio">
+              <div class="cabeca" data-bs-toggle="tooltip" title="Cabeça polar (hidrofílica)"></div>
+              <div class="cauda" data-bs-toggle="tooltip" title="Cauda apolar (hidrofóbica)"></div>
+            </div>
+            <div class="fosfolipidio">
+              <div class="cabeca" data-bs-toggle="tooltip" title="Cabeça polar (hidrofílica)"></div>
+              <div class="cauda" data-bs-toggle="tooltip" title="Cauda apolar (hidrofóbica)"></div>
+            </div>
+
+            <div class="proteina" 
+                style="background: rgb(190, 0, 0);" 
+                data-bs-toggle="tooltip" 
+                title="Proteína de membrana: transporta substâncias e atua na comunicação celular."></div>
+
+            <div class="fosfolipidio">
+              <div class="cabeca" data-bs-toggle="tooltip" title="Cabeça polar (hidrofílica)"></div>
+              <div class="cauda" data-bs-toggle="tooltip" title="Cauda apolar (hidrofóbica)"></div>
+            </div>
+            <div class="fosfolipidio">
+              <div class="cabeca" data-bs-toggle="tooltip" title="Cabeça polar (hidrofílica)"></div>
+              <div class="cauda" data-bs-toggle="tooltip" title="Cauda apolar (hidrofóbica)"></div>
+            </div>
           </div>
         </div>
 
@@ -543,86 +541,58 @@
       </div>
     </div>
 
-
-    <!-- Comparação -->
+      <!-- Quiz carrossel -->
     <div class="card shadow-sm mb-4">
       <div class="card-body">
-        <h2 class="h4 text-info">Comparação</h2>
-        <div class="row text-center">
-          <div class="col-md-6 p-3 bg-light border rounded">
-            <h5 class="fw-bold text-primary">Membrana</h5>
-            <ul class="list-unstyled">
-              <li>Presente em todas as células</li>
-              <li>Flexível</li>
-              <li>Composta por lipídios e proteínas</li>
-              <li>Função seletiva</li>
-            </ul>
+        <h2 class="h4 text-warning">Quiz interativo</h2>
+
+        <div id="quizCarousel" class="carousel slide" data-bs-interval="false">
+          <div class="carousel-inner">
+
+            <!-- Pergunta 1 -->
+            <div class="carousel-item active">
+              <h5>Todas as células possuem parede celular?</h5>
+              <div class="list-group">
+                <button class="list-group-item list-group-item-action quiz-option" data-correct="false" data-explain="Não! As células animais não possuem parede celular, apenas membrana plasmática.">Sim</button>
+                <button class="list-group-item list-group-item-action quiz-option" data-correct="true" data-explain="Correto! Apenas plantas, fungos e bactérias possuem parede celular.">Não</button>
+              </div>
+              <div class="explanation mt-2"></div>
+            </div>
+
+            <!-- Pergunta 2 -->
+            <div class="carousel-item">
+              <h5>Qual a principal função da membrana plasmática?</h5>
+              <div class="list-group">
+                <button class="list-group-item list-group-item-action quiz-option" data-correct="false" data-explain="Errado. Sustentação e rigidez são funções da parede celular.">Fornecer rigidez</button>
+                <button class="list-group-item list-group-item-action quiz-option" data-correct="true" data-explain="Correto! A membrana controla a entrada e saída de substâncias (permeabilidade seletiva).">Controlar a entrada e saída de substâncias</button>
+                <button class="list-group-item list-group-item-action quiz-option" data-correct="false" data-explain="Não. A fotossíntese é realizada nos cloroplastos das células vegetais.">Realizar fotossíntese</button>
+              </div>
+              <div class="explanation mt-2"></div>
+            </div>
+
+            <!-- Pergunta 3 -->
+            <div class="carousel-item">
+              <h5>Qual composto forma a parede celular das plantas?</h5>
+              <div class="list-group">
+                <button class="list-group-item list-group-item-action quiz-option" data-correct="true" data-explain="Correto! A celulose é o principal componente da parede celular vegetal.">Celulose</button>
+                <button class="list-group-item list-group-item-action quiz-option" data-correct="false" data-explain="Errado. A quitina é encontrada em fungos e artrópodes.">Quitina</button>
+                <button class="list-group-item list-group-item-action quiz-option" data-correct="false" data-explain="Não. O peptidoglicano compõe a parede das bactérias.">Peptidoglicano</button>
+              </div>
+              <div class="explanation mt-2"></div>
+            </div>
+
           </div>
-          <div class="col-md-6 p-3 bg-light border rounded">
-            <h5 class="fw-bold text-success">Parede Celular</h5>
-            <ul class="list-unstyled">
-              <li>Presente em plantas, fungos e bactérias</li>
-              <li>Rígida</li>
-              <li>Composta por celulose, quitina ou peptidoglicano</li>
-              <li>Função estrutural</li>
-            </ul>
-          </div>
+
+          <!-- Controles -->
+          <button class="carousel-control-prev" type="button" data-bs-target="#quizCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#quizCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+          </button>
         </div>
       </div>
     </div>
-
-  <!-- Quiz carrossel -->
-<div class="card shadow-sm mb-4">
-  <div class="card-body">
-    <h2 class="h4 text-warning">Quiz interativo</h2>
-
-    <div id="quizCarousel" class="carousel slide" data-bs-interval="false">
-      <div class="carousel-inner">
-
-        <!-- Pergunta 1 -->
-        <div class="carousel-item active">
-          <h5>Todas as células possuem parede celular?</h5>
-          <div class="list-group">
-            <button class="list-group-item list-group-item-action quiz-option" data-correct="false" data-explain="Não! As células animais não possuem parede celular, apenas membrana plasmática.">Sim</button>
-            <button class="list-group-item list-group-item-action quiz-option" data-correct="true" data-explain="Correto! Apenas plantas, fungos e bactérias possuem parede celular.">Não</button>
-          </div>
-          <div class="explanation mt-2"></div>
-        </div>
-
-        <!-- Pergunta 2 -->
-        <div class="carousel-item">
-          <h5>Qual a principal função da membrana plasmática?</h5>
-          <div class="list-group">
-            <button class="list-group-item list-group-item-action quiz-option" data-correct="false" data-explain="Errado. Sustentação e rigidez são funções da parede celular.">Fornecer rigidez</button>
-            <button class="list-group-item list-group-item-action quiz-option" data-correct="true" data-explain="Correto! A membrana controla a entrada e saída de substâncias (permeabilidade seletiva).">Controlar a entrada e saída de substâncias</button>
-            <button class="list-group-item list-group-item-action quiz-option" data-correct="false" data-explain="Não. A fotossíntese é realizada nos cloroplastos das células vegetais.">Realizar fotossíntese</button>
-          </div>
-          <div class="explanation mt-2"></div>
-        </div>
-
-        <!-- Pergunta 3 -->
-        <div class="carousel-item">
-          <h5>Qual composto forma a parede celular das plantas?</h5>
-          <div class="list-group">
-            <button class="list-group-item list-group-item-action quiz-option" data-correct="true" data-explain="Correto! A celulose é o principal componente da parede celular vegetal.">Celulose</button>
-            <button class="list-group-item list-group-item-action quiz-option" data-correct="false" data-explain="Errado. A quitina é encontrada em fungos e artrópodes.">Quitina</button>
-            <button class="list-group-item list-group-item-action quiz-option" data-correct="false" data-explain="Não. O peptidoglicano compõe a parede das bactérias.">Peptidoglicano</button>
-          </div>
-          <div class="explanation mt-2"></div>
-        </div>
-
-      </div>
-
-      <!-- Controles -->
-      <button class="carousel-control-prev" type="button" data-bs-target="#quizCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#quizCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon"></span>
-      </button>
-    </div>
-  </div>
-</div>
 
   </main>
 
@@ -665,6 +635,5 @@
     });
   });
 </script>
-
 </body>
 </html>
