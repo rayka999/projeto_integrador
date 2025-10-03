@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>BioMaket</title>
+  <link rel="icon" href="https://em-content.zobj.net/source/microsoft-teams/337/microbe_1f9a0.png" type="image/png">
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
@@ -136,6 +137,155 @@
       50% { transform: translateY(-10px); }
     }
 
+    /* ---------------- Célula ---------------- */
+  .cell-container {
+    position: relative;
+    width: 250px;
+    height: 250px;
+    margin: 2rem auto;
+  }
+
+  /* Parede celular - hexágono */
+  .cell-wall {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    clip-path: polygon(
+      50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%
+    );
+    background-color: #2ecc71;
+    z-index: 0;
+    cursor: pointer;
+  }
+
+  /* Membrana */
+  .cell-membrane {
+    position: absolute;
+    top: 25px;      
+    left: 25px;     
+    width: calc(100% - 50px);  
+    height: calc(100% - 50px);
+    border-radius: 50%;
+    border: 16px solid #eb2d18;
+    background-color: transparent;
+    z-index: 1;
+    cursor: pointer;
+    animation: membraneFloat 4s infinite ease-in-out;
+  }
+
+  /* Citoplasma */
+  .cell-cytoplasm {
+    position: absolute;
+    top: 35px;
+    left: 35px;
+    width: calc(100% - 70px);
+    height: calc(100% - 70px);
+    border-radius: 50%;
+    background-color: #f5d27d;
+    z-index: 2;
+    cursor: pointer;
+    overflow: hidden;
+    animation: cytoplasmFloat 6s infinite ease-in-out;
+  }
+
+  .cytoplasm-particle {
+    position: absolute;
+    width: 8px;
+    z-index: 3;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #ffb703;
+    animation: particleMove linear infinite;
+  }
+
+  /* Núcleo */
+  .cell-nucleus {
+    position: absolute;
+    top: 100px;
+    left: 100px;
+    width: calc(100% - 200px);
+    height: calc(100% - 200px);
+    border-radius: 50%;
+    background-color: #9b59b6;
+    z-index: 3;
+    cursor: pointer;
+  }
+
+  /* Cloroplastos */
+.chloroplast {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: #27ae60;
+  border-radius: 50%;
+  z-index: 4;
+  cursor: pointer;
+  animation: moveSmall 6s infinite alternate;
+}
+
+/* Mitocôndrias */
+.mitochondria {
+  position: absolute;
+  width: 25px;
+  height: 15px;
+  background-color: #e67e22;
+  border-radius: 50% / 40%;
+  z-index: 4;
+  cursor: pointer;
+  animation: moveMedium 8s infinite alternate;
+}
+
+/* Vacúolo */
+.vacuole {
+  position: absolute;
+  width: 50px;
+  height: 80px;
+  background-color: #5dade2;
+  border-radius: 50%;
+  z-index: 6;
+  top: 60px;
+  left: 45px;
+  cursor: pointer;
+}
+
+/* Animações de organelas */
+@keyframes moveSmall {
+  0% { transform: translate(0,0);}
+  25% { transform: translate(8px,-5px);}
+  50% { transform: translate(-8px,6px);}
+  75% { transform: translate(5px,5px);}
+  100% { transform: translate(0,0);}
+}
+
+@keyframes moveMedium {
+  0% { transform: translate(0,0);}
+  25% { transform: translate(-10px,8px);}
+  50% { transform: translate(10px,-10px);}
+  75% { transform: translate(-5px,5px);}
+  100% { transform: translate(0,0);}
+}
+
+  /* ---------------- Animações ---------------- */
+  @keyframes membraneFloat {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+  }
+
+  @keyframes cytoplasmFloat {
+    0%,100% { transform: translate(0,0); }
+    25% { transform: translate(2px,-2px); }
+    50% { transform: translate(-2px,2px); }
+    75% { transform: translate(1px,1px); }
+  }
+
+  @keyframes particleMove {
+    0% { transform: translate(0,0); }
+    25% { transform: translate(10px,-8px); }
+    50% { transform: translate(-10px,8px); }
+    75% { transform: translate(8px,-8px); }
+    100% { transform: translate(0,0); }
+  }
+
     /* Quiz - botões e alternativas */
 .quiz-option {
   cursor: pointer;
@@ -257,7 +407,6 @@
         </p>
 
         <!-- Animação -->
-        <h5 class="text-primary">Animação</h5>
         <div class="membrana-bicamada mb-3">
           <!-- Camada superior -->
           <div class="camada-top">
@@ -338,15 +487,62 @@
     <div class="card shadow-sm mb-4">
       <div class="card-body">
         <h2 class="h4 text-success">Parede Celular</h2>
+
+        <!-- Conceito -->
+        <h3 class="h6 text-success mt-3">Conceito</h3>
         <p>
-          Presente em plantas, fungos e bactérias, a parede celular fornece <strong>sustentação e proteção</strong>. 
-          Ela é rígida e composta principalmente por 
-          <span class="tooltip-custom" data-bs-toggle="tooltip" title="Polissacarídeo estrutural encontrado em plantas">celulose</span> (em vegetais), 
-          <span class="tooltip-custom" data-bs-toggle="tooltip" title="polissacarídio estrutural integrante do exosqueleto dos artrópodes e da parede celular dos fungos">quitina</span> (em fungos) ou 
-          <span class="tooltip-custom" data-bs-toggle="tooltip" title="polímero formado por açúcares e aminoácidos que compõe a parede celular bacteriana, conferindo forma e resistência mecânica à célula">peptidoglicano</span> (em bactérias).
+          A <strong>parede celular</strong> é uma estrutura rígida que envolve algumas células, fornecendo 
+          <strong>proteção, suporte e forma</strong>. Está presente em plantas, algas, fungos, bactérias e algumas arqueias, 
+          e sua composição varia conforme o organismo.
+        </p>
+        <div class="cell-container">
+        <div class="cell-wall" data-bs-toggle="tooltip" title="Parede celular: protege e dá forma à célula."></div>
+        <div class="cell-membrane" data-bs-toggle="tooltip" title="Membrana plasmática: controla a entrada e saída de substâncias."></div>
+        <div class="cell-cytoplasm" data-bs-toggle="tooltip" title="Citoplasma: contém organelas e permite o movimento intracelular."> </div>
+        <div class="cytoplasm-particle" style="top:70px; left:170px; animation-duration:5s;" data-bs-toggle="tooltip" title="Ribossomo: sintetiza proteínas a partir das informações contidas no RNA mensageiro"></div>
+        <div class="cytoplasm-particle" style="top:90px; left:150px; animation-duration:4s;" data-bs-toggle="tooltip" title="Ribossomo: sintetiza proteínas a partir das informações contidas no RNA mensageiro"></div>
+        <!-- Cloroplastos -->
+        <div class="chloroplast" style="top:160px; left:120px;" data-bs-toggle="tooltip" title="Cloroplasto: realiza fotossíntese."></div>
+        <div class="chloroplast" style="top:120px; left:160px;" data-bs-toggle="tooltip" title="Cloroplasto: realiza fotossíntese."></div>
+
+        <!-- Mitocôndrias -->
+        <div class="mitochondria" style="top:70px; left:110px;" data-bs-toggle="tooltip" title="Mitocôndria: produz energia (ATP)."></div>
+
+        <!-- Vacúolo -->
+        <div class="vacuole" data-bs-toggle="tooltip" title="Vacúolo: armazena água e nutrientes."></div>
+        <div class="cell-nucleus" data-bs-toggle="tooltip" title="Núcleo: contém o material genético e controla a célula."></div>
+      </div>
+
+        <!-- Estrutura e Composição -->
+        <h3 class="h6 text-success mt-3">Estrutura e Composição</h3>
+        <p>
+          - <strong>Plantas:</strong> lamela média (pectina), parede primária (celulose, hemicelulose e pectina, fina e flexível) 
+          e parede secundária (celulose, hemicelulose e lignina, espessa e rígida).<br>
+          - <strong>Algas:</strong> podem ter parede de celulose, alginatos (gel) ou sílica (como vidro, em diatomáceas).<br>
+          - <strong>Fungos:</strong> parede de <span class="tooltip-custom" data-bs-toggle="tooltip" title="Polissacarídio estrutural integrante do exosqueleto dos artrópodes e da parede celular dos fungos">quitina</span>, glucanos e proteínas; pseudofungos possuem parede de celulose.<br>
+          - <strong>Bactérias:</strong> parede de <span class="tooltip-custom" data-bs-toggle="tooltip" title="Polímero formado por açúcares e aminoácidos que compõe a parede celular bacteriana, conferindo forma e resistência mecânica à célula">peptidoglicano</span>. Gram-positivas: camada espessa, ácido teicóico, sensíveis à lisozima; Gram-negativas: camada fina com membrana externa de fosfolipídeos, lipoproteínas e lipopolissacarídeos.<br>
+          - <strong>Arqueias:</strong> pseudopeptidoglicano, proteínas ou polissacarídeos.
+        </p>
+
+        <!-- Funções principais -->
+        <h3 class="h6 text-success mt-3">Funções Principais</h3>
+        <ul>
+          <li><strong>Proteção:</strong> barreira contra estresse mecânico e invasores.</li>
+          <li><strong>Manter a forma:</strong> garante rigidez e formato da célula.</li>
+          <li><strong>Regulação da pressão osmótica:</strong> evita que a célula estoure em meio hipotônico.</li>
+          <li><strong>Comunicação e transporte:</strong> poros e canais permitem troca de substâncias e sinais químicos entre células.</li>
+        </ul>
+
+        <!-- Importância -->
+        <h3 class="h6 text-success mt-3">Importância</h3>
+        <p>
+          A parede celular é essencial para a <strong>sobrevivência e integridade das células</strong>, 
+          mantendo a estrutura, resistência e proteção contra o ambiente. Nas plantas, permite que fiquem firmes em pé; 
+          nas bactérias e fungos, protege contra invasores; e em algas e arqueias, garante resistência e estabilidade.
         </p>
       </div>
     </div>
+
 
     <!-- Comparação -->
     <div class="card shadow-sm mb-4">
