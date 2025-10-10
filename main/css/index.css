@@ -1,0 +1,38 @@
+.bottom-buttons {
+  position: fixed;
+  bottom: 50px; /* deixa espaço para o rodapé */
+  left: 0;
+  width: 100%;
+  background-color: #02A724;
+  padding: 10px 0;
+  z-index: 3;
+}
+
+.bottom-buttons .row {
+  margin: 0;
+}
+
+.bottom-buttons .col {
+  padding: 2px;
+}
+
+.bottom-buttons a.btn {
+  width: 100%;
+  white-space: nowrap;
+}
+
+footer {
+  position: fixed;
+  bottom: 0; /* rodapé sempre na base */
+  left: 0;
+  width: 100%;
+  text-align: center;
+  padding: 15px 0;
+  background-color: #006400;
+  color: #fff;
+  z-index: 4; /* acima dos botões */
+}
+
+body {
+  padding-bottom: 170px; /* espaço para botões + rodapé não sobrepor conteúdo */
+}
