@@ -1,0 +1,65 @@
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  padding: 15px 0;
+  z-index: 9;
+}
+
+body {
+  padding-bottom: 60px;
+  padding-top: 30px;
+}
+
+#quizCarousel .carousel-inner {
+    min-height: 360px;
+}
+
+#quizCarousel .card {
+    margin-top: 10px;
+}
+
+.custom-control {
+    position: absolute;
+    height: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    z-index: 5;
+}
+
+.carousel-control-prev.custom-control {
+    left: 10px;
+}
+
+.carousel-control-next.custom-control {
+    right: 10px;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: #20c997;
+    border-radius: 50%;
+    padding: 18px;
+    filter: none;
+    transition: background-color 0.3s ease; /* transição suave */
+}
+
+.carousel-control-prev-icon:hover,
+.carousel-control-next-icon:hover {
+  background-color: #198754; /* muda quando o mouse está em cima */
+}
+
+.carousel-control-prev-icon:active,
+.carousel-control-next-icon:active {
+  background-color: #145c42; /* cor quando clica */
+}
+
+@media (max-width: 576px) {
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+      padding: 12px;
+    }
+}
