@@ -23,10 +23,6 @@ body {
 
 .custom-control {
     position: absolute;
-    height: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
     z-index: 5;
 }
 
