@@ -1,3 +1,10 @@
+header {
+  background: linear-gradient(90deg, #2ba757, #39fe39);
+  color: white;
+  padding: 3rem 1rem;
+}
+
+
 .bottom-buttons {
   position: fixed;
   bottom: 50px; /* deixa espaço para o rodapé */
