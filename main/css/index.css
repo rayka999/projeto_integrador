@@ -1,7 +1,7 @@
 header {
   background: linear-gradient(90deg, #2ba757, #06c006);
   color: white;
-  padding: 3rem 1rem;
+  padding: 1rem 1rem;
 }
 
 footer {
@@ -18,4 +18,5 @@ footer {
 
 body {
   padding-bottom: 60px; 
+  padding-top: 40px;
 }
