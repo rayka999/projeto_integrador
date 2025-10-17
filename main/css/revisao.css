@@ -6,56 +6,59 @@ footer {
   text-align: center;
   padding: 15px 0;
   z-index: 9;
+  background-color: #198754;
 }
 
 body {
-  padding-bottom: 60px;
-  padding-top: 30px;
+  padding-bottom: 70px; 
+  padding-top: 70px; 
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
 }
 
 #quizCarousel .carousel-inner {
-    min-height: 360px;
+  min-height: auto; /* remove altura fixa que empurrava o conteúdo */
 }
 
 #quizCarousel .card {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
-.custom-control {
-    position: absolute;
-    z-index: 5;
+.quiz-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
 }
 
-.carousel-control-prev.custom-control {
-    left: 10px;
+.btn-success,
+.btn-outline-success {
+  transition: background-color 0.3s ease, color 0.3s ease;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.carousel-control-next.custom-control {
-    right: 10px;
+.btn-success:hover {
+  background-color: #157347;
 }
 
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-    background-color: #20c997;
-    border-radius: 50%;
-    padding: 18px;
-    filter: none;
-    transition: background-color 0.3s ease; /* transição suave */
-}
-
-.carousel-control-prev-icon:hover,
-.carousel-control-next-icon:hover {
-  background-color: #198754; /* muda quando o mouse está em cima */
-}
-
-.carousel-control-prev-icon:active,
-.carousel-control-next-icon:active {
-  background-color: #145c42; /* cor quando clica */
+.btn-outline-success:hover {
+  background-color: #20c997;
+  color: #fff;
 }
 
 @media (max-width: 576px) {
-    .carousel-control-prev-icon,
-    .carousel-control-next-icon {
-      padding: 12px;
-    }
+  .quiz-controls {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .quiz-controls .btn {
+    width: 100%;
+  }
 }
