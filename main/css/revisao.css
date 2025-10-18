@@ -62,3 +62,54 @@ main {
     width: 100%;
   }
 }
+
+/* Títulos */
+h2.semelhancas {
+  background-color: #2e8b57;
+  color:#eaf6ec;
+  text-align: center;
+}
+
+h2.diferencas {
+  background-color: #c0392b;
+  color:#eaf6ec;
+  text-align: center;
+}
+
+/* --- Semelhanças --- */
+.table-semelhancas th {
+  background-color: #2e8b57;
+  color: white;
+  text-align: center;
+}
+
+.table-semelhancas td {
+  background-color: #f2f9f4;
+  border-color: #c7e1cf;
+}
+
+.table-semelhancas tr:nth-child(even) td {
+  background-color: #eaf6ec;
+}
+
+/* --- Diferenças --- */
+.table-diferencas th {
+  background-color: #c0392b;
+  color: white;
+  text-align: center;
+}
+
+.table-diferencas td {
+  border-color: #f0d4d1;
+}
+
+.table-diferencas tr:nth-child(even) td {
+  background-color: #fdf1ef;
+}
+
+.categoria {
+  font-weight: 600;
+  background-color: #fbe5e1;
+  color: #c0392b;
+  text-align: center;
+}
